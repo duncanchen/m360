@@ -7,8 +7,8 @@ import {
 } from "@remix-run/react";
 import stylesheet from "./tailwind.css?url";
 import { LinksFunction } from "@remix-run/node";
-import "@fontsource/space-mono/400-italic.css";
-import "@fontsource/space-mono/700-italic.css";
+import "@fontsource/space-mono/400.css";
+import "@fontsource/space-mono/700.css";
 // Supports weights 400-900
 import "@fontsource-variable/ruda";
 // Supports weights 100-700

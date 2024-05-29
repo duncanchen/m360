@@ -79,3 +79,7 @@
 .blue-gradient {
   @apply bg-gradient-to-b from-blue-500 to-cyan-400 bg-clip-text text-transparent;
 }
+
+.font-straight {
+  font-style: normal;
+}
