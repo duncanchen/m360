@@ -5,6 +5,18 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import stylesheet from "./tailwind.css?url";
+import { LinksFunction } from "@remix-run/node";
+import "@fontsource/space-mono/400-italic.css";
+import "@fontsource/space-mono/700-italic.css";
+// Supports weights 400-900
+import "@fontsource-variable/ruda";
+// Supports weights 100-700
+import "@fontsource-variable/montagu-slab/opsz.css";
+
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: stylesheet },
+];
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
