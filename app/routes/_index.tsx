@@ -24,7 +24,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     });
   } else {
     return json(
-      { status: "error" },
+      { error: `error: ${process.env["passcode"]}` },
       {
         status: 400,
       },
@@ -33,14 +33,16 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 };
 
 export default function Index() {
-  const { status } = useActionData<typeof action>() || {};
+  const { error } = useActionData<typeof action>() || {};
   return (
     <div className=" h-screen bg-background text-foreground p-12">
       <div className="container mx-auto space-y-4 font-mono italic">
         <div className="mt-40">
           <span className="purple-gradient  text-[5rem]">m</span>
           <span className="purple-gradient text-[5rem] font-extrabold">T</span>
-          <span className="blue-gradient text-[5rem] font-extrabold">360</span>
+          <span className="blue-gradient text-[5rem] font-extrabold">
+            {"360 "}
+          </span>
           <span className="primary-gradient px-4 text-[5rem]  font-serif not-italic">
             {" MOCK "}
           </span>
@@ -71,7 +73,7 @@ export default function Index() {
             </Button>
           </div>
           <div className="mt-4 ml-4 text-red-500">
-            {status === "error" && <span>{status}</span>}
+            {error && <span>{error}</span>}
           </div>
         </Form>
 
