@@ -19,11 +19,22 @@ export default function About() {
     <div className="container max-auto">
       <div className="grid grid-cols-2 gap-4 font-mono">
         <div>
-          <img alt="random headshot" className="w-32" src={getRandomLink()} />
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt,
-          deserunt dicta nihil necessitatibus enim facere illum suscipit
-          doloremque saepe molestias soluta, harum ullam iusto minima itaque ea
-          et iste eum.
+          <img
+            alt="random headshot"
+            className="w-40 p-4"
+            src={getRandomLink()}
+          />
+          <p className="leading-8">
+            {`
+            In the current mt360, we do not
+            check/confirm users' emails. However, in the upcoming Auth360, email
+            will be a major MFA authentication method, requiring confirmation.
+            For simulation purposes, please specify your mTrade email or select
+            an external email that is easily accessible to you. During the
+            account provisioning process, you will need to confirm your email
+            address by clicking a link embedded in the registration email. 
+            `}
+          </p>
         </div>
         <div>
           <Button variant="default">Register</Button>
