@@ -24,7 +24,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     });
   } else {
     return json(
-      { error: `error: ${process.env["passcode"]}` },
+      { error: `error: remember it?` },
       {
         status: 400,
       },
