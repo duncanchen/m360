@@ -3,6 +3,9 @@ import { Form, Outlet, json, redirect, useActionData } from "@remix-run/react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
 import { getFormData } from "~/lib/request-utils";
+import { useUserStore } from "~/components/store";
+import { randomUser } from "~/lib/fake/name"
+import { User } from "~/lib/dto/zuser"
 
 export const meta: MetaFunction = () => {
   return [
@@ -11,15 +14,21 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+const base64Json = (data: User) => {
+  return Buffer.from(JSON.stringify(data)).toString("base64");
+}
+
 export const action = async ({ request }: ActionFunctionArgs) => {
   const [passcode] = await getFormData(request, ["passcode"]);
   if (
     passcode &&
     passcode.trim().replace(/\s/g, "") == process.env["passcode"]
   ) {
+    const user = randomUser()
+
     return redirect("/about", {
       headers: {
-        "Set-Cookie": "mt360_user_id=123; Max-Age=3600; Path=/",
+        "Set-Cookie": `mt360_user=${base64Json(user)}; Max-Age=3600; Path=/`,
       },
     });
   } else {

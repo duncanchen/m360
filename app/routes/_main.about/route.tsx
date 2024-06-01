@@ -1,30 +1,42 @@
 import { Button } from "~/components/ui/button";
+import { useUserStore } from "~/components/store";
 
-const links = [
-  "https://www.lgrc.us/wp-content/uploads/2020/09/Bussinesswoman-Headshot-Placeholder.jpg",
-  "https://ssw.uga.edu/wp-content/uploads/2018/03/Headshot-Placeholder-1.png",
-  "https://pcad.edu/wp-content/uploads/2017/07/headshot-placeholder.jpg",
-  "https://avatars.githubusercontent.com/u/1509420?v=4",
-  "https://avatars.githubusercontent.com/u/11976836?v=4",
-  "https://avatars.githubusercontent.com/u/952007?v=4",
-  "https://yt3.googleusercontent.com/ytc/AIdro_m0JgCBMCYDFIhw7p5T9hzaXP71VvZbEiGDL33_kzeasw=s160-c-k-c0x00ffffff-no-rj",
-  "https://yt3.googleusercontent.com/BOqXoLaL-2P-5-XDqgefvYkDKwYFdODfWwo5ljNa5C92fOJOLyFjzi8GLv2hphOsdoz6G80VTQ=s160-c-k-c0x00ffffff-no-rj",
-  "https://yt3.googleusercontent.com/ky8pQskjM1aU_mHCqL_Atpa2Oqsg1B7cCbXBdl5Yhqy4Ml928vUgH6sMv9-VaOiAYHGU6U8PZQ=s160-c-k-c0x00ffffff-no-rj",
-];
-
-const getRandomLink = () => links[Math.floor(Math.random() * links.length)];
 
 export default function About() {
+  const { user } = useUserStore();
+
   return (
     <div className="container max-auto">
-      <div className="grid grid-cols-2 gap-4 font-mono">
-        <div>
-          <img
-            alt="random headshot"
-            className="w-40 p-4"
-            src={getRandomLink()}
-          />
-          <p className="leading-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono">
+        <div className="">
+
+          <div className="flex flex-col md:flex-row gap-4 bg-gray-900 rounded-md">
+            <img
+              alt="random headshot"
+              className="w-40 p-4"
+              src={user?.url}
+            />
+            <div className="p-4 space-y-2">
+              <div className="font-sans text-2xl font-thin">
+                // User Account
+              </div>
+              <div className="flex flex-row items-baseline gap-4">
+                <div>
+                  {user?.email}
+                </div>
+                <div className="bg-red-500 inline-flex justify-center rounded-md font-xs w-[1.3rem] h-[1.4rem]">
+                  ?
+                </div>
+              </div>
+              <div>
+                Name: {user?.givenName} {user?.surname}
+              </div>
+              <div>Login: {user?.login}</div>
+            </div>
+          </div>
+
+
+          <p className="leading-8 mt-4">
             {`
             In the current mt360, we do not
             check/confirm users' emails. However, in the upcoming Auth360, email
