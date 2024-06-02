@@ -3,7 +3,6 @@ import { Form, Outlet, json, redirect, useActionData } from "@remix-run/react"
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
 import { getFormData } from "~/lib/request-utils"
-import { useUserStore } from "~/components/store"
 import { randomUser } from "~/lib/fake/name"
 import { User } from "~/lib/dto/zuser"
 
