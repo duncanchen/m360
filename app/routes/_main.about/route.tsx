@@ -1,9 +1,17 @@
-import { Button } from "~/components/ui/button";
-import { useUserStore } from "~/components/store";
+import { Button } from "~/components/ui/button"
+import { useUserStore } from "~/components/store"
+import React from "react"
 
+const E = ({ children }: {
+             children: React.ReactNode
+           }
+) => {
+  return <span className="text-foreground">{children}</span>
+
+}
 
 export default function About() {
-  const { user } = useUserStore();
+  const { user } = useUserStore()
 
   return (
     <div className="container max-auto">
@@ -36,16 +44,15 @@ export default function About() {
           </div>
 
 
-          <p className="leading-8 mt-4">
-            {`
+          <p className="leading-8 mt-4 text-foreground/50">
+
             In the current mt360, we do not
-            check/confirm users' emails. However, in the upcoming Auth360, email
-            will be a major MFA authentication method, requiring confirmation.
+            check/confirm emails. However, in the upcoming Auth360, email
+            will be a <E>major MFA authentication method, requiring confirmation.
             For simulation purposes, please specify your mTrade email or select
-            an external email that is easily accessible to you. During the
+            an external email that is easily accessible to you.</E> During the
             account provisioning process, you will need to confirm your email
-            address by clicking a link embedded in the registration email. 
-            `}
+            address by clicking a link embedded in the registration email.
           </p>
         </div>
         <div>
@@ -53,5 +60,5 @@ export default function About() {
         </div>
       </div>
     </div>
-  );
+  )
 }
