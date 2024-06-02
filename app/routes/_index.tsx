@@ -1,9 +1,9 @@
-import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node";
-import { Form, Outlet, json, redirect, useActionData } from "@remix-run/react";
-import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
-import { getFormData } from "~/lib/request-utils";
-import { useUserStore } from "~/components/store";
+import type { ActionFunctionArgs, MetaFunction } from "@remix-run/node"
+import { Form, Outlet, json, redirect, useActionData } from "@remix-run/react"
+import { Button } from "~/components/ui/button"
+import { Input } from "~/components/ui/input"
+import { getFormData } from "~/lib/request-utils"
+import { useUserStore } from "~/components/store"
 import { randomUser } from "~/lib/fake/name"
 import { User } from "~/lib/dto/zuser"
 
@@ -11,15 +11,15 @@ export const meta: MetaFunction = () => {
   return [
     { title: "mT360" },
     { name: "description", content: "Simulate mT360 User!" },
-  ];
-};
+  ]
+}
 
 const base64Json = (data: User) => {
-  return Buffer.from(JSON.stringify(data)).toString("base64");
+  return Buffer.from(JSON.stringify(data)).toString("base64")
 }
 
 export const action = async ({ request }: ActionFunctionArgs) => {
-  const [passcode] = await getFormData(request, ["passcode"]);
+  const [passcode] = await getFormData(request, ["passcode"])
   if (
     passcode &&
     passcode.trim().replace(/\s/g, "") == process.env["passcode"]
@@ -30,26 +30,28 @@ export const action = async ({ request }: ActionFunctionArgs) => {
       headers: {
         "Set-Cookie": `mt360_user=${base64Json(user)}; Max-Age=3600; Path=/`,
       },
-    });
+    })
   } else {
     return json(
       { error: `error: remember it?` },
       {
         status: 400,
       },
-    );
+    )
   }
-};
+}
 
 export default function Index() {
-  const { error } = useActionData<typeof action>() || {};
+  const { error } = useActionData<typeof action>() || {}
   return (
     <div className=" h-screen bg-background text-foreground p-12">
       <div className="container mx-auto space-y-4 font-mono italic">
         <div className="mt-40">
           <span className="purple-gradient  text-[5rem]">m</span>
-          <span className="purple-gradient text-[5rem] font-extrabold">T</span>
-          <span className="blue-gradient text-[5rem] font-extrabold">
+          <span className="purple-gradient text-[5rem] font-extrabold tracking-wider">
+            T
+          </span>
+          <span className="blue-gradient text-[5rem] font-extrabold ">
             {"360 "}
           </span>
           <span className="primary-gradient px-4 text-[5rem]  font-serif not-italic">
@@ -91,5 +93,5 @@ export default function Index() {
         </div>
       </div>
     </div>
-  );
+  )
 }
