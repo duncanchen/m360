@@ -44,7 +44,7 @@ export default function Index() {
   const { error } = useActionData<typeof action>() || {}
   return (
     <div className=" h-screen bg-background text-foreground p-12">
-      <div className="container mx-auto space-y-4 font-mono italic">
+      <div className="container mx-auto space-y-4 font-mono italic tracking-wide">
         <div className="mt-40">
           <span className="purple-gradient  text-[5rem]">m</span>
           <span className="purple-gradient text-[5rem] font-extrabold tracking-wider">

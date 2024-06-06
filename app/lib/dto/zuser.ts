@@ -6,7 +6,7 @@ export const ZUser = z.object({
   email: z.string().email(),
   login: z.string(),
   url: z.string().optional(),
-  id: z.string()
+  id: z.coerce.number(),
 })
 
 export type User = z.infer<typeof ZUser>

@@ -138,9 +138,9 @@ const links = [
   "https://yt3.googleusercontent.com/ytc/AIdro_m0JgCBMCYDFIhw7p5T9hzaXP71VvZbEiGDL33_kzeasw=s160-c-k-c0x00ffffff-no-rj",
   "https://yt3.googleusercontent.com/BOqXoLaL-2P-5-XDqgefvYkDKwYFdODfWwo5ljNa5C92fOJOLyFjzi8GLv2hphOsdoz6G80VTQ=s160-c-k-c0x00ffffff-no-rj",
   "https://yt3.googleusercontent.com/ky8pQskjM1aU_mHCqL_Atpa2Oqsg1B7cCbXBdl5Yhqy4Ml928vUgH6sMv9-VaOiAYHGU6U8PZQ=s160-c-k-c0x00ffffff-no-rj",
-];
+]
 
-const getRandomLink = () => links[Math.floor(Math.random() * links.length)];
+const getRandomLink = () => links[Math.floor(Math.random() * links.length)]
 
 
 
@@ -155,6 +155,6 @@ export const randomUser = () => {
     email,
     url: getRandomLink(),
     login: surname.toLowerCase() + Math.floor(Math.random() * 100),
-    id: Math.floor(Math.random() * 1000) + "-" + Math.floor(Math.random() * 1000) + "-" + Math.floor(Math.random() * 1000),
+    id: Math.floor(Math.random() * 10000),
   } as User
 }

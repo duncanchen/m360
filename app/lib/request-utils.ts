@@ -33,6 +33,16 @@ export const bodyAsPayload = async (request: Request) => {
   return { ...qs.parse(await request.text()), _tag: `payload` } as Payload
 }
 
+export const getRequestPayload = async (request: Request) => {
+  const contentType = request.headers.get("content-type")
+  if (contentType?.includes("application/x-www-form-urlencoded")) {
+    return await bodyAsPayload(request)
+  }
+  if (contentType?.includes("application/json")) {
+    return await request.json()
+  }
+  return searchAsPayload(request)
+}
 
 export const getFormData = async (request: Request, names: string[]) => {
   const formData = await request.formData()
@@ -84,4 +94,8 @@ export function getCookies(request: Request, names: string[]) {
   const cookieHeader = request.headers.get("cookie")
   const parsed = cookieHeader ? cookie.parse(cookieHeader) : {}
   return names.map(name => parsed[name])
+}
+
+export const parseBase64Decode = (data: string) => {
+  return JSON.parse(Buffer.from(data, "base64").toString("utf-8"))
 }
