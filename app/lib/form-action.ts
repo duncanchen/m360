@@ -10,5 +10,8 @@ export async function postData(url: string, data: Record<string, string>): Promi
     body: new URLSearchParams(data)
   })
 
-  return await response.json()
+  const text = await response.text()
+  console.log(text)
+
+  return await JSON.parse(text)
 }
