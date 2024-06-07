@@ -1,8 +1,9 @@
 import { z } from "zod"
 
 export const ZUser = z.object({
-  givenName: z.string(),
-  surname: z.string(),
+  firstName: z.string(),
+  lastName: z.string(),
+  companyName: z.string(),
   email: z.string().email(),
   login: z.string(),
   url: z.string().optional(),

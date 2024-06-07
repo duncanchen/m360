@@ -4,11 +4,9 @@ import React from "react"
 import { useUserStore } from "~/components/store"
 import { Button } from "~/components/ui/button"
 import { Input } from "~/components/ui/input"
-import {
-  getCookies,
-  getRequestPayload,
-  parseBase64Decode,
-} from "~/lib/request-utils"
+import { postData } from "~/lib/form-action"
+import { getCookies, getRequestPayload } from "~/lib/request-utils"
+import { clientConfig, authBaseUrl } from "~/service/client.server"
 
 const E = ({ children }: { children: React.ReactNode }) => {
   return <span className="text-foreground">{children}</span>
@@ -16,8 +14,14 @@ const E = ({ children }: { children: React.ReactNode }) => {
 
 export const action = async ({ request }: ActionFunctionArgs) => {
   const payload = await getRequestPayload(request)
-  const [mtUser] = getCookies(request, ["mt360_user"])
-  return { ...payload, ...parseBase64Decode(mtUser) }
+  const [mtUserRaw] = getCookies(request, ["mt360_user"])
+  const mtUser = mtUserRaw ? JSON.parse(atob(mtUserRaw)) : {}
+  const stagingUserData = { ...mtUser, ...payload, ...clientConfig }
+  const stagingResult = await postData(
+    authBaseUrl + "/api/user/stage",
+    stagingUserData,
+  )
+  return stagingResult
 }
 
 export default function About() {
@@ -40,7 +44,7 @@ export default function About() {
                 </div>
               </div>
               <div>
-                Name: {user?.givenName} {user?.surname}
+                Name: {user?.firstName} {user?.lastName}
               </div>
               <div>Login: {user?.login}</div>
             </div>
@@ -87,7 +91,11 @@ export default function About() {
             </Button>
           </Form>
           <div className="flex flex-col space-12">
-            <pre>{JSON.stringify(actionData, null, 2)}</pre>
+            {actionData && (
+              <pre className="overflow-clip mt-4 p-4 bg-slate-600">
+                {JSON.stringify(actionData, null, 2)}
+              </pre>
+            )}
           </div>
         </div>
       </div>

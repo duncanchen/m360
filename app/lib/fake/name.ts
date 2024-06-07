@@ -146,15 +146,17 @@ const getRandomLink = () => links[Math.floor(Math.random() * links.length)]
 
 
 export const randomUser = () => {
-  const givenName = randomFirstName()
-  const surname = randomLastName()
-  const email = `${givenName}.${surname}@${randomDomain().toLowerCase()}`.toLowerCase()
+  const firstName = randomFirstName()
+  const lastName = randomLastName()
+  const companyName = randomDomain()
+  const email = `${firstName}.${lastName}@${companyName.toLowerCase()}`.toLowerCase()
   return {
-    givenName,
-    surname,
+    firstName,
+    lastName,
     email,
+    companyName,
     url: getRandomLink(),
-    login: surname.toLowerCase() + Math.floor(Math.random() * 100),
+    login: lastName.toLowerCase() + Math.floor(Math.random() * 100),
     id: Math.floor(Math.random() * 10000),
   } as User
 }
